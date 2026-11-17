@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <title>Restablecer contraseña | ElPadrinoStudio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/account.css">
+
+  <style>
+    :root {
+      --bg: #11110f;
+      --panel: #1b1a17;
+      --cream: #f0eee7;
+      --gold: #c99a5b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'DM Sans', Arial, sans-serif;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .announcement {
+      padding: 9px;
+      text-align: center;
+      background: #090909;
+      color: #c9a36e;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .reset-main {
+      width: min(480px, 92%);
+      margin: 55px auto;
+      align-self: center;
+    }
+
+    .reset-card {
+      background: var(--panel);
+      border: 1px solid #39352e;
+      padding: 28px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font: 700 clamp(34px, 7vw, 48px)/1.1 Oswald, sans-serif;
+      margin: 12px 0;
+    }
+
+    h1 em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .description {
+      color: #b8b2a6;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    .reset-form {
+      display: grid;
+      gap: 15px;
+    }
+
+    .reset-form label {
+      display: grid;
+      gap: 7px;
+      color: #c8bda9;
+      font-size: 12px;
+    }
+
+    .reset-form input {
+      width: 100%;
+      min-height: 45px;
+      padding: 10px;
+      background: #10100f;
+      color: white;
+      border: 1px solid #514a3e;
+    }
+
+    .reset-form button {
+      min-height: 46px;
+      padding: 10px;
+      background: var(--gold);
+      border: 0;
+      color: #17130e;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .reset-message {
+      font-size: 13px;
+      color: #e58b76;
+    }
+
+    .reset-message.ok { color: #9bc69b; }
+
+    .reset-footer {
+      text-align: center;
+      padding: 22px;
+      border-top: 1px solid #39352e;
+      color: #aaa;
+      font-size: 12px;
+    }
+
+    a { color: var(--gold); }
+
+    [hidden] { display: none !important; }
+  </style>
+</head>
+
+<body>
+  <div class="announcement">EL PADRINO STUDIO · BARBERÍA</div>
+
+  <main class="reset-main">
+    <section class="reset-card">
+      <p class="eyebrow">RECUPERACIÓN DE CUENTA</p>
+      <h1>NUEVA <em>CONTRASEÑA.</em></h1>
+
+      <p class="description">
+        Establece una nueva contraseña para recuperar el acceso a tu cuenta.
+      </p>
+
+      <form id="reset-form" class="reset-form" hidden>
+        <label>
+         
+<label>
+  Nueva contraseña
+  <div class="password-field">
+    <input
+      id="new-password"
+      type="password"
+      minlength="8"
+      autocomplete="new-password"
+      required
+    >
+    <button
+      type="button"
+      class="toggle-password"
+      data-password="new-password"
+      aria-label="Mostrar contraseña"
+      aria-pressed="false"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+    </button>
+  </div>
+</label>
+
+<label>
+  Confirmar contraseña
+  <div class="password-field">
+    <input
+      id="confirm-password"
+      type="password"
+      minlength="8"
+      autocomplete="new-password"
+      required
+    >
+    <button
+      type="button"
+      class="toggle-password"
+      data-password="confirm-password"
+      aria-label="Mostrar contraseña"
+      aria-pressed="false"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+    </button>
+  </div>
+</label>
+
+        </label>
+
+        <button id="reset-submit" type="submit">
+          ACTUALIZAR CONTRASEÑA
+        </button>
+      </form>
+
+      <p id="reset-message" class="reset-message" role="status">
+        Verificando el enlace de recuperación...
+      </p>
+
+      <p>
+        <a href="cuenta-acceso.html">Volver al inicio de sesión</a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="reset-footer">
+    © 2026 ElPadrinoStudio.
+  </footer>
+
+  <script type="module" src="js/restablecer.js"></script>
+</body>
+</html>

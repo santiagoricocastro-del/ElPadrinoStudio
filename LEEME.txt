@@ -1,0 +1,58 @@
+EL PADRINO STUDIO — CUENTAS DE CLIENTE (FASE 1)
+
+CONTENIDO NUEVO
+- cuenta-acceso.html: registro e inicio de sesión con Supabase Auth.
+- mi-cuenta.html: panel de cliente, listado de reservas vinculadas y formulario para vincular reservas de invitado.
+- js/auth.js y js/cuenta.js: lógica de autenticación y panel.
+- css/account.css: estilos del área de cliente.
+- supabase-cuenta-clientes.sql: migración SQL para asociar reservas con cuentas, listar citas propias y cancelar con 2 horas de anticipación.
+- Al confirmar una reserva, aparece un enlace para crear cuenta y luego vincularla con el código y teléfono del comprobante.
+
+ANTES DE PROBAR
+1. Abre js/supabase-config.js y pega el Project URL (solo https://...supabase.co, sin /rest/v1/) y la Publishable key sb_publishable_...
+2. En Supabase > SQL Editor, ejecuta una vez el archivo supabase-cuenta-clientes.sql.
+3. En Supabase > Authentication > URL Configuration, configura Site URL y Redirect URLs para tu dirección local/hosting.
+4. En Authentication > Providers > Email, revisa si la confirmación de correo está activada. Si lo está, el cliente debe confirmar el correo antes de iniciar sesión.
+5. Abre el sitio mediante Live Server, no con file://.
+
+FLUJO
+- El cliente reserva como invitado.
+- Guarda el código de reserva.
+- Puede crear una cuenta después.
+- En Mi cuenta, inicia sesión y vincula la reserva usando código + teléfono.
+- Después verá sus reservas vinculadas y podrá cancelar si faltan más de 2 horas.
+
+ALCANCE Y LIMITACIONES IMPORTANTES
+- Esta es una primera fase de cuentas, no una versión lista para producción.
+- El vínculo por código + teléfono es una comprobación básica de posesión; antes de publicar se recomienda añadir verificación OTP y limitación de intentos.
+- La migración presupone que las tablas y funciones de reservas existentes ya están instaladas y que appointments tiene los campos usados por el motor de reservas.
+- La cancelación usa status='cancelled'. Si tu tabla tiene una restricción de estados distinta, el SQL devolverá un error y habrá que adaptar el valor al esquema real.
+- La reprogramación todavía no está activada. Se implementará con una operación atómica en servidor para evitar perder la reserva original si el nuevo horario no se puede reservar.
+- El mockup de pagos y el panel administrativo no están incluidos todavía.
+- No se implementan cobros, WhatsApp ni recordatorios reales en esta fase.
+- Nunca pongas una clave sb_secret_ o service_role en archivos del navegador.
+
+
+FASE 4 — MÉTODOS DE PAGO DEMOSTRATIVOS
+- En agendar.html se puede seleccionar PSE, Nequi, Daviplata,
+  transferencia bancaria (datos ficticios) o pago presencial.
+- La selección se muestra en el comprobante de la reserva.
+- No se realiza ningún cobro, no se solicita información financiera
+  y no se crea una transacción real.
+- El método elegido se conserva únicamente en el comprobante de esta
+  sesión; esta fase no lo almacena en Supabase.
+- Para pagos reales se necesitaría integrar un proveedor autorizado,
+  backend seguro, validación de webhooks y revisión de requisitos legales.
+Conserva js/supabase-config.js con tus valores actuales.
+
+FASE 5 - PANEL ADMINISTRATIVO
+1. En Supabase SQL Editor, ejecutar una sola vez el archivo supabase-panel-admin.sql.
+2. La cuenta que fue agregada a public.admin_profiles queda autorizada. El panel valida el permiso en servidor mediante is_admin_user(); no basta con conocer la URL.
+3. Abrir admin.html mediante Live Server e iniciar sesión con esa cuenta.
+4. Los datos y acciones del panel se consultan mediante RPC SECURITY DEFINER con verificación de admin_profiles. No se expone service_role en el navegador.
+5. No reemplazar js/supabase-config.js.
+
+Incluye agenda por rango de fechas y barbero, cambio de estado (pendiente/confirmada/cancelada) y creación/eliminación de bloqueos. La creación de bloqueos rechaza periodos que se crucen con citas pendientes o confirmadas.
+
+IMPORTANTE: esta entrega es una fase funcional de desarrollo. Antes de producción, revisar políticas RLS de todas las tablas, limitar intentos de autenticación, probar con dos cuentas (administrador y cliente), verificar restricciones de estados y realizar pruebas de concurrencia. Los pagos continúan siendo simulados.
+\n\nCORRECCIÓN DEL PANEL ADMINISTRATIVO\n- Esta entrega reemplaza admin.html y js/admin.js por versiones con estilos esenciales locales y manejo visible de errores.\n- No requiere ejecutar SQL adicional. Conserva tu js/supabase-config.js actual y tus datos.\n- Para probar: extrae todo el ZIP, abre la carpeta elpadino-modernizado en VS Code, inicia Live Server desde index.html y visita admin.html.\n\n\nACCESO DIRECTO AL PANEL ADMINISTRATIVO\n- admin.html ahora incluye su propio formulario de inicio de sesión.\n- Usa la misma cuenta que ya está autorizada en public.admin_profiles; no crees otra cuenta.\n- El acceso del panel no redirige a mi-cuenta.html.\n- Conserva js/supabase-config.js con la URL y Publishable key actuales del proyecto.\n\nMODO DEMOSTRACION INTERNA\n- Las confirmaciones muestran una vista previa y permiten simular el envío dentro del panel.\n- No se abre WhatsApp ni se envían mensajes reales.\n- La simulación se mantiene solo mientras la página está abierta; no modifica la base de datos.\n

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#111111"><title>Mi cuenta | ElPadrinoStudio</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/styles.css"><link rel="stylesheet" href="css/account.css"></head>
+<body><div class="announcement"><span class="status-dot"></span> TU EXPERIENCIA, A TU MANERA</div><header class="site-header"><div class="barra"><a class="logo" href="index.html"><span class="logo-mark">EP</span><span>EL PADRINO<small>STUDIO · BARBERÍA</small></span></a><nav><a href="index.html">Inicio</a><a href="servicios.html">Servicios</a><a href="barberos.html">Barberos</a><a href="agendar.html">Agendar cita</a><a href="cuenta-acceso.html" class="activo">Mi cuenta</a></nav></div></header>
+<main class="inner-main account-main"><section class="page-hero"><p class="eyebrow">BIENVENIDO A EL PADRINO</p><h1>GESTIONA TU<br><em>EXPERIENCIA.</em></h1><p class="intro">Crea tu cuenta después de reservar o inicia sesión para consultar tus citas.</p></section>
+<div class="account-grid"><section class="account-panel"><div class="account-tabs"><button type="button" class="tab active" id="tab-login">Iniciar sesión</button><button type="button" class="tab" id="tab-signup">Crear cuenta</button></div>
+<form id="login-form"><label class="form-label" for="login-email">Correo electrónico</label><input id="login-email" type="email" autocomplete="email" required>
+<label class="form-label" for="login-password">Contraseña</label>
+<div class="password-field">
+<input id="login-password" type="password" autocomplete="current-password" minlength="8" required>
+<button type="button" class="toggle-password" data-password="login-password" aria-label="Mostrar contraseña" aria-pressed="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
+    <circle cx="12" cy="12" r="3"/>
+    </svg>
+</button>
+</div>
+<button class="boton account-submit" type="submit">INICIAR SESIÓN ↗</button><button class="text-button" type="button" id="forgot-password">¿Olvidaste tu contraseña?</button></form>
+<form id="signup-form" hidden><label class="form-label" for="signup-name">Nombre completo</label><input id="signup-name" type="text" autocomplete="name" minlength="3" maxlength="100" required><label class="form-label" for="signup-phone">Teléfono de la reserva</label><input id="signup-phone" type="tel" autocomplete="tel" minlength="7" maxlength="20" required><label class="form-label" for="signup-email">Correo electrónico</label><input id="signup-email" type="email" autocomplete="email" required>
+<label class="form-label" for="signup-password">Contraseña (mínimo 8 caracteres)</label>
+<div class="password-field">
+<input id="signup-password" type="password" autocomplete="new-password" minlength="8" required>
+<button type="button" class="toggle-password" data-password="signup-password" aria-label="Mostrar contraseña" aria-pressed="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/>
+    <circle cx="12" cy="12" r="3"/>
+    </svg>
+</button>
+</div>
+<button class="boton account-submit" type="submit">CREAR MI CUENTA ↗</button><p class="field-hint">Después de registrarte podrás vincular una reserva con su código y el teléfono usado al reservar.</p></form><p id="auth-message" class="mensaje" role="status"></p></section><aside class="account-aside"><span class="aside-mark">EP</span><p class="eyebrow">EL PADRINO STUDIO</p><h2>TU ESTILO.<br><em>TU TIEMPO.</em></h2><p>Consulta tus próximas visitas y conserva tu historial en un solo lugar.</p></aside></div></main>
+<footer class="site-footer"><a class="logo" href="index.html"><span class="logo-mark">EP</span><span>EL PADRINO<small>STUDIO · BARBERÍA</small></span></a><p>© 2026 ElPadrinoStudio.</p><a href="index.html">INICIO ↗</a><a class="footer-admin" href="admin.html">ACCESO ADMINISTRACIÓN</a></footer><script type="module" src="js/auth.js"></script></body></html>

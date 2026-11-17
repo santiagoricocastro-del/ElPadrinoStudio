@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111111">
+<title>Panel del barbero | ElPadrinoStudio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+
+<style>
+:root{
+  --bg:#11110f;
+  --panel:#1b1a17;
+  --cream:#f0eee7;
+  --muted:#b8b2a6;
+  --gold:#c99a5b;
+  --line:#39352e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--cream);font:15px 'DM Sans',Arial,sans-serif;line-height:1.6}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+[hidden]{display:none!important}
+
+.announcement{padding:9px;text-align:center;background:#090909;color:#c9a36e;font-size:10px;letter-spacing:2px}
+.site-header{background:#151512;border-bottom:1px solid var(--line)}
+.barra{max-width:1180px;margin:auto;min-height:72px;padding:12px 4%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font:600 18px Oswald,Arial,sans-serif}
+.logo small{display:block;font:600 9px 'DM Sans',Arial,sans-serif;letter-spacing:2px;color:#aaa;margin-top:4px}
+.logo-mark{border:1px solid var(--gold);color:var(--gold);padding:8px}
+.nav-logout{background:transparent;color:#e5c18e;border:1px solid #80633e;padding:9px 13px;cursor:pointer}
+
+.main{width:min(1180px,92%);margin:42px auto 75px}
+.eyebrow{color:var(--gold);font-size:10px;letter-spacing:2px;font-weight:700;margin:0 0 9px}
+.hero{margin-bottom:28px}
+.hero h1{font:700 clamp(38px,7vw,66px)/1.05 Oswald,Arial,sans-serif;margin:0 0 10px}
+.hero h1 em,.card h2 em{color:var(--gold);font-style:normal}
+#welcome{color:#c7c2b9;margin:0}
+
+.card{background:var(--panel);border:1px solid #34312b;padding:22px;min-width:0}
+.card h2{font:600 29px Oswald,Arial,sans-serif;margin:0 0 17px}
+.toolbar{display:flex;gap:13px;align-items:end;flex-wrap:wrap;background:var(--panel);border:1px solid #34312b;padding:17px;margin-bottom:20px}
+.field{display:grid;gap:6px;flex:1;min-width:145px}
+.field label,.service-choice-label{font-size:12px;color:#c8bda9}
+.field input,.field select{width:100%;min-height:43px;background:#10100f;color:#f4f1eb;border:1px solid #514a3e;padding:9px}
+.button{min-height:42px;padding:9px 15px;background:var(--gold);border:1px solid var(--gold);color:#17130e;font-weight:700;cursor:pointer}
+.button.secondary{background:transparent;color:#e4bd83;border-color:#80633e}
+.button:disabled{opacity:.5;cursor:not-allowed}
+.view-switch{display:flex;gap:7px}
+.view-switch button.active{background:var(--gold);color:#17130e;border-color:var(--gold)}
+.agenda-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:20px;align-items:start}
+.agenda-card{min-height:300px}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:17px}
+.card-head h2{margin:0}
+.count{color:#d1a568;font-size:13px}
+.booking-list{display:grid;gap:12px}
+.booking{background:#141412;border:1px solid var(--line);padding:14px}
+.booking-top{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.booking-time{font:600 18px Oswald,Arial,sans-serif;color:#e4bd83}
+.booking h3{font-size:16px;margin:5px 0}
+.booking p{font-size:13px;color:#c5beb2;margin:4px 0}
+.status{font-size:10px;letter-spacing:.08em;border:1px solid #5d513e;padding:3px 7px;color:#d5b27e;height:max-content}
+.booking-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.booking-actions button{border:1px solid #80633e;background:transparent;color:#e4bd83;padding:7px 10px;cursor:pointer}
+.booking-actions button:disabled{opacity:.5;cursor:not-allowed}
+.empty{color:var(--muted);font-size:13px;padding:15px 0}
+.day-group{margin-bottom:23px}
+.day-title{font:600 19px Oswald,Arial,sans-serif;color:#e2c18f;border-bottom:1px solid var(--line);padding-bottom:8px;margin:0 0 12px}
+.detail-panel{position:sticky;top:18px}
+.detail-panel p{font-size:13px;color:#c5beb2}
+.detail-line{padding:10px 0;border-bottom:1px solid var(--line)}
+.detail-line strong{display:block;color:#e4bd83;font-size:11px;letter-spacing:1px;text-transform:uppercase}
+.detail-line span{display:block;margin-top:4px;overflow-wrap:anywhere}
+.detail-actions{display:grid;gap:9px;margin-top:17px}
+.create-card{margin-top:20px}
+.create-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.service-list{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px}
+.service-choice{border:1px solid var(--line);background:#141412;padding:10px;font-size:13px;display:flex;gap:9px;align-items:flex-start}
+.service-choice input{accent-color:var(--gold);margin-top:4px}
+.service-choice small{display:block;color:var(--muted)}
+.form-message{font-size:13px;color:#e5bd82;margin-top:12px}
+.form-message.error{color:#e58b76}
+.form-message.ok{color:#9bc69b}
+.site-footer{max-width:1180px;margin:auto;padding:28px 4%;display:flex;justify-content:space-between;gap:16px;border-top:1px solid var(--line);color:#aaa;font-size:12px}
+
+@media(max-width:850px){
+  .agenda-layout{grid-template-columns:1fr}
+  .detail-panel{position:static}
+}
+@media(max-width:560px){
+  .main{margin-top:28px}
+  .card{padding:15px}
+  .create-grid,.service-list{grid-template-columns:1fr}
+  .toolbar .field{min-width:calc(50% - 10px)}
+  .view-switch{width:100%}
+  .view-switch button{flex:1}
+  .barra{padding:12px 4%}
+}
+
+.agenda-navigation {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.agenda-navigation button {
+  white-space: nowrap;
+}
+
+@media(max-width:560px) {
+  .agenda-navigation {
+    width: 100%;
+  }
+
+  .agenda-navigation button {
+    flex: 1;
+    padding: 9px 7px;
+    font-size: 12px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+<div class="announcement">● ÁREA PRIVADA · EL PADRINO STUDIO</div>
+
+<header class="site-header">
+  <div class="barra">
+    <a class="logo" href="index.html">
+      <span class="logo-mark">EP</span>
+      <span>EL PADRINO<small>STUDIO · BARBERÍA</small></span>
+    </a>
+    <button id="logout" class="nav-logout" type="button">Cerrar sesión</button>
+  </div>
+</header>
+
+<main class="main">
+  <section class="hero">
+    <p class="eyebrow">PANEL DEL BARBERO</p>
+    <h1>MI <em>AGENDA.</em></h1>
+    <p id="welcome">Verificando sesión y permisos...</p>
+  </section>
+
+  <section id="loading-panel" class="card">
+    <p class="empty">Comprobando tu acceso...</p>
+  </section>
+
+  <section id="barber-app" hidden>
+    <div class="toolbar">
+      <div class="field">
+        <label for="agenda-date">Fecha de referencia</label>
+        <input id="agenda-date" type="date">
+      </div>
+
+      <div class="view-switch">
+        <button id="daily-view" class="button secondary active" type="button">DÍA</button>
+        <button id="weekly-view" class="button secondary" type="button">SEMANA</button>
+      </div>
+
+      <button id="refresh" class="button" type="button">ACTUALIZAR</button>
+    </div>
+
+<div class="agenda-navigation">
+  <button id="agenda-prev" class="button secondary" type="button">
+    ‹ ANTERIOR
+  </button>
+
+  <button id="agenda-today" class="button secondary" type="button">
+    HOY
+  </button>
+
+  <button id="agenda-next" class="button secondary" type="button">
+    SIGUIENTE ›
+  </button>
+</div>
+
+
+    <div class="agenda-layout">
+      <section class="card agenda-card">
+        <div class="card-head">
+          <div>
+            <p class="eyebrow">TUS RESERVAS</p>
+            <h2 id="agenda-heading">AGENDA <em>DIARIA.</em></h2>
+          </div>
+          <span id="booking-count" class="count">0 citas</span>
+        </div>
+        <div id="booking-list" class="booking-list">
+          <p class="empty">Cargando agenda...</p>
+        </div>
+      </section>
+
+      <aside class="card detail-panel">
+        <p class="eyebrow">INFORMACIÓN</p>
+        <h2>DETALLE <em>DE CITA.</em></h2>
+        <div id="detail-content">
+          <p>Selecciona una reserva para consultar sus detalles.</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="card create-card">
+      <p class="eyebrow">NUEVA RESERVA</p>
+      <h2>AGENDAR <em>CLIENTE.</em></h2>
+
+      <form id="booking-form">
+        <div class="create-grid">
+          <div class="field">
+            <label for="customer-name">Nombre del cliente</label>
+            <input id="customer-name" type="text" minlength="3" maxlength="100" required>
+          </div>
+
+          <div class="field">
+            <label for="customer-phone">Teléfono</label>
+            <input id="customer-phone" type="tel" required placeholder="Ej. 3001234567">
+          </div>
+
+          <div class="field">
+            <label for="booking-start">Fecha y hora</label>
+            <input id="booking-start" type="datetime-local" required>
+          </div>
+        </div>
+
+        <div style="margin-top:17px">
+          <label class="service-choice-label">Servicios que solicita el cliente</label>
+          <div id="service-list" class="service-list">
+            <p class="empty">Cargando servicios...</p>
+          </div>
+        </div>
+
+        <button class="button" type="submit" style="margin-top:18px">CREAR RESERVA</button>
+        <p id="booking-message" class="form-message" role="status"></p>
+      </form>
+    </section>
+  </section>
+
+  <p id="global-message" class="form-message" role="status"></p>
+</main>
+
+<footer class="site-footer">
+  <a class="logo" href="index.html">
+    <span class="logo-mark">EP</span>
+    <span>EL PADRINO<small>STUDIO · BARBERÍA</small></span>
+  </a>
+  <p>© 2026 ElPadrinoStudio.</p>
+</footer>
+
+<script type="module" src="js/barber.js"></script>
+</body>
+</html>
